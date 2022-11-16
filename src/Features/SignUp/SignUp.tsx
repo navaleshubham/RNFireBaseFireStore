@@ -3,6 +3,7 @@ import React, {useState} from 'react';
 import {Button, Text, TextInput} from 'react-native-paper';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {useNavigation} from '@react-navigation/native';
+import {createUser} from '../../Auth';
 
 export const SignUp = () => {
   const [email, setEmail] = useState('');
@@ -10,7 +11,17 @@ export const SignUp = () => {
   const [name, setName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const {navigate} = useNavigation();
-  const handleSignIn = () => {};
+  const handleSignUp = async () => {
+    const res = await createUser({
+      email,
+      password,
+      mobileNumber: phoneNumber,
+      name,
+    });
+    if (res) {
+      navigate('VerifyOtp', {email});
+    }
+  };
   const navigateToSignIn = () => {
     navigate('SignIn');
   };
@@ -74,7 +85,7 @@ export const SignUp = () => {
             <View style={styles.loginButtonContainer}>
               <Button
                 style={styles.loginButton}
-                onPress={handleSignIn}
+                onPress={handleSignUp}
                 textColor="#fff">
                 Sign Up
               </Button>

@@ -1,23 +1,20 @@
-import {View, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import React, {useState} from 'react';
-import {Button, Text, TextInput} from 'react-native-paper';
+import {Button, TextInput} from 'react-native-paper';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {useNavigation} from '@react-navigation/native';
-import {login} from '../../Auth';
+import {verifyOtp} from '../../Auth';
 
-export const SignIn = (props: any) => {
-  const message = props?.route?.params?.message;
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+export const VerifyOtp = (props: any) => {
+  const userEmail = props?.route?.params?.email;
+  const [otp, setOtp] = useState('');
   const {navigate} = useNavigation();
-  const handleSignIn = async () => {
-    const res = await login({email, password});
+
+  const handleVerifyOto = async () => {
+    const res = await verifyOtp({email: userEmail, otp});
     if (res) {
-      navigate('Home', {userInfo: res});
+      navigate('SignIn', {message: 'Please sign in using credentials'});
     }
-  };
-  const navigateToSignUp = () => {
-    navigate('SignUp');
   };
 
   return (
@@ -29,44 +26,34 @@ export const SignIn = (props: any) => {
         extraHeight={150}>
         <View style={styles.contentContainer}>
           <View>
-            <View>
-              <Text>{message}</Text>
-            </View>
             <TextInput
-              onChangeText={setEmail}
-              value={email}
+              value={userEmail}
               placeholder="Email"
               importantForAutofill="yes"
               textContentType="username"
               keyboardType="email-address"
               autoCapitalize="none"
               style={styles.input}
+              disabled
             />
             <TextInput
-              secureTextEntry
-              onChangeText={setPassword}
-              value={password}
+              onChangeText={setOtp}
+              value={otp}
               importantForAutofill="yes"
-              placeholder={'Password'}
-              textContentType="password"
+              placeholder={'Otp'}
+              textContentType="oneTimeCode"
               style={styles.input}
+              maxLength={6}
+              keyboardType="number-pad"
             />
 
             <View style={styles.loginButtonContainer}>
               <Button
                 style={styles.loginButton}
-                onPress={handleSignIn}
+                onPress={handleVerifyOto}
                 textColor="#fff">
-                Sign in
+                Verify Otp
               </Button>
-            </View>
-            <View style={styles.inline}>
-              <Text>No Account? </Text>
-              <TouchableOpacity
-                style={styles.buttonContainer}
-                onPress={navigateToSignUp}>
-                <Text style={styles.label}> Sign Up </Text>
-              </TouchableOpacity>
             </View>
           </View>
         </View>

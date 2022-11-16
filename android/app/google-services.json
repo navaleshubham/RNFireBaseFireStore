@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "868530418152",
+    "project_id": "plweddev-codetest",
+    "storage_bucket": "plweddev-codetest.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:868530418152:android:d67ddcf55d649e7c63b45d",
+        "android_client_info": {
+          "package_name": "com.plwebdev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "868530418152-3j22r6tchj3g79iip0i7tvbvus6956sk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAq5NUikzpNmxCJebCa9Rh3jD-viJDp0qo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "868530418152-3j22r6tchj3g79iip0i7tvbvus6956sk.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "868530418152-4ojh2caq0omjh3tb9u488kn65vprslg1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.plwebdev"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
