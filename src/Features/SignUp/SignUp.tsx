@@ -1,9 +1,11 @@
-import {View, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, StyleSheet, TouchableOpacity, Dimensions} from 'react-native';
 import React, {useState} from 'react';
 import {Button, Text, TextInput} from 'react-native-paper';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {useNavigation} from '@react-navigation/native';
 import {createUser} from '../../Auth';
+const width = Dimensions.get('window').width;
+const height = Dimensions.get('window').height;
 
 export const SignUp = () => {
   const [email, setEmail] = useState('');
@@ -107,10 +109,11 @@ export const SignUp = () => {
 
 const styles = StyleSheet.create({
   buttonContainer: {
-    marginVertical: 4,
+    marginVertical: height * 0.005,
+    borderRadius: 0,
   },
   contentContainer: {
-    marginHorizontal: 12,
+    marginHorizontal: width * 0.012,
     padding: 8,
     justifyContent: 'space-around',
     flexDirection: 'column',
@@ -120,10 +123,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'center',
-    marginTop: 12,
+    marginTop: height * 0.012,
   },
   loginButton: {
-    marginBottom: 8,
+    marginBottom: height * 0.012,
     backgroundColor: 'blue',
     borderRadius: 8,
     width: 300,
@@ -138,15 +141,13 @@ const styles = StyleSheet.create({
   },
   input: {
     backgroundColor: 'transparent',
-    marginVertical: 12,
+    marginVertical: height * 0.012,
   },
   inline: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 8,
+    marginTop: width * 0.008,
   },
-  label: {
-    color: 'blue',
-  },
+  label: {color: 'blue'},
 });
