@@ -47,7 +47,7 @@ export const Home = props => {
   const localNotification = () => {
     PushNotification.localNotification({
       message: 'My Schedule Notification Message',
-      title: 'Schedule Notification',
+      title: 'Immediate Notification',
     });
   };
   const sendEmail = async () => {
