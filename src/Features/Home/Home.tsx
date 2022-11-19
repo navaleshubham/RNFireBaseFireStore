@@ -41,7 +41,7 @@ export const Home = props => {
     PushNotification.localNotificationSchedule({
       message: 'My Schedule Notification Message',
       title: 'Schedule Notification',
-      date: new Date(Date.now() + 60 * 1000),
+      date: new Date(Date.now() + 10 * 1000),
     });
   };
   const localNotification = () => {
@@ -59,7 +59,7 @@ export const Home = props => {
         <Button style={styles.button} onPress={scheduleNotification}>
           <View style={styles.buttonContainer}>
             <Text style={styles.buttonLabel}>
-              Generate Notification {'\n'} (15 minutes for now)
+              Generate Notification {'\n'} (10 seconds for now)
             </Text>
           </View>
         </Button>
