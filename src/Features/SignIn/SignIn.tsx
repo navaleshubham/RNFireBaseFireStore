@@ -1,9 +1,16 @@
-import {View, StyleSheet, TouchableOpacity, Dimensions} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  Dimensions,
+  Image,
+} from 'react-native';
 import React, {useState} from 'react';
 import {Button, Text, TextInput} from 'react-native-paper';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {useNavigation} from '@react-navigation/native';
 import {login} from '../../Auth';
+import logoIcon from '../../Assets/logo.png';
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
@@ -25,6 +32,9 @@ export const SignIn = (props: any) => {
 
   return (
     <View style={styles.localContainer}>
+      <View style={styles.image}>
+        <Image source={logoIcon} style={styles.infoImage} />
+      </View>
       <KeyboardAwareScrollView
         keyboardShouldPersistTaps={'handled'}
         overScrollMode="never"
@@ -98,7 +108,7 @@ const styles = StyleSheet.create({
   },
   loginButton: {
     marginBottom: height * 0.012,
-    backgroundColor: 'blue',
+    backgroundColor: '#000099',
     borderRadius: 8,
     width: 300,
   },
@@ -120,5 +130,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginTop: width * 0.008,
   },
-  label: {color: 'blue'},
+  label: {color: '#000099'},
+  image: {
+    marginTop: height * 0.05,
+    alignSelf: 'center',
+  },
+  infoImage: {
+    height: height * 0.06,
+    width: width * 0.7,
+    alignSelf: 'center',
+  },
 });
