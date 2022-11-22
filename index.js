@@ -12,9 +12,6 @@ export default function Main() {
       notification.finish(PushNotificationIOS.FetchResult.NoData);
     },
 
-    onRegistrationError: function (err) {
-      console.error(err.message, err);
-    },
     permissions: {
       alert: true,
       badge: true,

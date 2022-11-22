@@ -1,6 +1,6 @@
 import {View, Text, StyleSheet, Dimensions} from 'react-native';
-import React from 'react';
-import {Button} from 'react-native-paper';
+import React, {useState} from 'react';
+import {Button, Dialog, Paragraph, Portal} from 'react-native-paper';
 import PushNotification from 'react-native-push-notification';
 import {sendEmailToUser} from '../../Auth/verification';
 
@@ -8,6 +8,7 @@ export const Home = props => {
   const width = Dimensions.get('window').width;
   const height = Dimensions.get('window').height;
   const userInfo = props?.route?.params?.userInfo;
+  const [showDialog, setShowDialog] = useState(false);
   const styles = StyleSheet.create({
     container: {
       justifyContent: 'space-around',
@@ -36,6 +37,11 @@ export const Home = props => {
       fontWeight: '600',
       textAlign: 'center',
     },
+    alertLabel: {
+      fontSize: 14,
+      fontWeight: '600',
+      textAlign: 'center',
+    },
   });
   const scheduleNotification = () => {
     PushNotification.localNotificationSchedule({
@@ -51,29 +57,42 @@ export const Home = props => {
     });
   };
   const sendEmail = async () => {
+    setShowDialog(true);
     await sendEmailToUser({email: userInfo?.email});
   };
   return (
-    <View style={styles.container}>
-      <View style={styles.buttonList}>
-        <Button style={styles.button} onPress={scheduleNotification}>
-          <View style={styles.buttonContainer}>
-            <Text style={styles.buttonLabel}>
-              Generate Notification {'\n'} (10 seconds for now)
-            </Text>
-          </View>
-        </Button>
-        <Button style={styles.button} onPress={localNotification}>
-          <View style={styles.buttonContainer}>
-            <Text style={styles.buttonLabel}>
-              Create Notification {'\n'} (this will display immediately)
-            </Text>
-          </View>
-        </Button>
-        <Button style={styles.button} onPress={sendEmail}>
-          <Text style={styles.buttonLabel}>Send email</Text>
-        </Button>
+    <>
+      <Portal>
+        <Dialog visible={showDialog} onDismiss={() => setShowDialog(false)}>
+          <Dialog.Content>
+            <Paragraph style={styles.alertLabel}>
+              You will receive mail shortly
+            </Paragraph>
+            <Button onPress={() => setShowDialog(false)}>Done</Button>
+          </Dialog.Content>
+        </Dialog>
+      </Portal>
+      <View style={styles.container}>
+        <View style={styles.buttonList}>
+          <Button style={styles.button} onPress={scheduleNotification}>
+            <View style={styles.buttonContainer}>
+              <Text style={styles.buttonLabel}>
+                Generate Notification {'\n'} (10 seconds for now)
+              </Text>
+            </View>
+          </Button>
+          <Button style={styles.button} onPress={localNotification}>
+            <View style={styles.buttonContainer}>
+              <Text style={styles.buttonLabel}>
+                Create Notification {'\n'} (this will display immediately)
+              </Text>
+            </View>
+          </Button>
+          <Button style={styles.button} onPress={sendEmail}>
+            <Text style={styles.buttonLabel}>Send email</Text>
+          </Button>
+        </View>
       </View>
-    </View>
+    </>
   );
 };

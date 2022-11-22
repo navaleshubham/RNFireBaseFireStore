@@ -29,12 +29,10 @@ export const sendEmailToUser = async ({email}: {email: string}) => {
       'Your new email from home screen',
       `Hello Buddy`,
     )
-      .then(data => {
-        console.log('fdone', data);
+      .then(() => {
         resolve(true);
       })
       .catch(err => {
-        console.log(err);
         reject(err);
       });
   });
