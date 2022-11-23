@@ -1,6 +1,7 @@
 import firestore from '@react-native-firebase/firestore';
 import {v4 as uuidv4} from 'uuid';
 import bcrypt from 'react-native-bcrypt';
+import isaac from 'isaac';
 import {sendOtpToUser} from './verification';
 
 declare var global: any;
@@ -13,6 +14,12 @@ if (__DEV__ && typeof global.crypto !== 'object') {
 } else {
   require('react-native-get-random-values');
 }
+bcrypt.setRandomFallback(len => {
+  const buf = new Uint8Array(len);
+
+  return buf.map(() => Math.floor(isaac.random() * 256));
+});
+
 export const createUser = async ({
   email,
   password,
@@ -27,7 +34,6 @@ export const createUser = async ({
   const salt = bcrypt.genSaltSync(10);
   const hash = bcrypt.hashSync(password, salt);
   const newOtp = await sendOtpToUser({email});
-
   if (newOtp?.toString().length === 6) {
     await firestore()
       .collection('Users')

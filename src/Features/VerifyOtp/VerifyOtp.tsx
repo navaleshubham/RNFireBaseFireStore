@@ -17,7 +17,7 @@ export const VerifyOtp = (props: any) => {
   const handleVerifyOto = async () => {
     const res = await verifyOtp({email: userEmail, otp});
     if (res) {
-      navigate('SignIn', {message: 'Please sign in using credentials'});
+      navigate('SignIn', {message: 'Please sign in using your credentials'});
     }
   };
 
